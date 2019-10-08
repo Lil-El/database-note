@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+插入数据：
+	db.course.insert({uid:9,name:'王阜新',course:'英语',score:78})
+	db.course.insert({uid:9,name:'王阜新',course:'语文',score:88})
+	db.course.insert({uid:9,name:'王阜新',course:'数学',score:92})
+	db.course.insert({uid:9,name:'王阜新',course:'java',score:95})
+	db.course.insert({uid:10,name:'闫晓东',course:'英语',score:81})
+	db.course.insert({uid:10,name:'闫晓东',course:'语文',score:68})
+	db.course.insert({uid:10,name:'闫晓东',course:'数学',score:100})
+	db.course.insert({uid:10,name:'闫晓东',course:'java',score:90})
+	db.course.insert({uid:11,name:'龙涛',course:'英语',score:85})
+	db.course.insert({uid:11,name:'龙涛',course:'语文',score:58})
+	db.course.insert({uid:11,name:'龙涛',course:'数学',score:93})
+	db.course.insert({uid:11,name:'龙涛',course:'java',score:88})
+
+
+$match：匹配条件，可选，过滤条件
+$limit：结果条数，可选
+$group：聚合规则
+$sort：排序
+	
+$sum:求和
+
+每个学生的科目数：
+db.course.aggregate([{$group:{_id:"$uid","科目数":{$sum:1}}},{$sort:{_id:1}}])
+db.course.aggregate([{$group:{_id:{uid:"$uid",name:"$name"},"科目数":{$sum:1}}},{$sort:{_id:1}}])
+
+学生总成绩：
+db.course.aggregate([{$group:{_id:{uid:"$uid",name:"$name"},course:{$sum:"$score"}}},{$sort:{_id:1}}])
+平均成绩：            --match一定放在group前面
+db.course.aggregate([{$group:{_id:{uid:"$uid",name:"$name"},course:{$avg:"$score"}}},{$sort:{_id:1}}])
+
+及格学生的平均成绩(只显示两条):
+db.course.aggregate([{$match:{score:{$gt:60,$lte:90}}},{$group:{_id:{uid:"$uid",name:"$name"},"科目数":{$sum:1},"总分":{$sum:"$score"},course:{$avg:"$score"}}},{$sort:{_id:1}},{$limit:2}])
+分页：      --skip要在limit前面，跳过一个显示2个
+db.course.aggregate([{$match:{score:{$gt:60,$lte:90}}},{$group:{_id:{uid:"$uid",name:"$name"},"科目数":{$sum:1},"总分":{$sum:"$score"},course:{$avg:"$score"}}},{$sort:{_id:1}},{$skip:1},{$limit:2}])
+
+</body>
+</html>

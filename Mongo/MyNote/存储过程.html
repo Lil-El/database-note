@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+创建存储过程
+db.system.js.save({_id:存储过程名称,value:存储过程体})
+db.system.js.insert({
+	_id:'add',
+	value:function(a,b){
+		return a+b;
+	}
+})
+查看存储过程
+db.system.js.find()
+执行方法（old）：
+	1.db.eval("add(9,3)")
+	2.add = db.eval("add")
+	  add(9,3)
+修改：
+db.system.js.save({_id:存储过程名称,value:存储过程体})
+删除：
+db.system.js.remove({_id:"add"})
+
+
+
+
+例子：将日期正常显示
+db.user.insert({name:'闫晓东',birth:new Date(1997,11,26)})
+db.user.insert({name:'王佳欣',birth:new Date(1997,9,18)})
+db.user.insert({name:'王茂法',birth:new Date(1998,5,20)})
+db.user.insert({name:'王阜新',birth:new Date(1997,1,26)})
+db.user.insert({name:'王一丁',birth:new Date(1998,7,4)})
+db.user.insert({name:龙涛',birth:new Date(1996,11,11)})
+在data下建一个js文件，因为在console中不方便写
+/*
+var db = connect('mydb')
+db.system.js.insert({
+	_id:'getFormatDate',
+	value:function(time) {
+		year = time.getFullYear();
+		mon = time.getMonth()+1;
+		date = time.getDate();
+		hour = time.getHours();
+		min = time.getMinutes();
+		sec = time.getSeconds();
+		newtime = year+'-'+mon+'-'+date+'-'+hour+':'+min+':'+sec;
+		return newtime;
+	}
+})
+db.system.js.insert({
+	_id:'getUserRs',
+	value:function(rs){
+		var mapArr;
+		mapArr = rs.map(function(item,index,array) {
+			getDate = db.eval('getFormatDate');
+			item.birth = getDate(item.birth);
+			return item;
+		})
+		return mapArr;
+	}
+})
+*/
+在console中：load('g:/data/storepro.js')
+然后调用getUserRs(db.user.find())
+
+</body>
+</html>

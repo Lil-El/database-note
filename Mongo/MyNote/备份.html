@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+1.在data在建立一个back文件夹，然后将mydb数据库备份一下子
+cd D:\Program Files\mongodb\....\bin
+mongodump -d mydb -o g:/data/back
+	{
+		mongodump -h IP -port 端口 -u 用户名 -p 密码 -d 数据库 -o 文件存在路径
+		没有用户，去掉-u-p
+		到处本机数据库，去掉-h
+		如果是默认端口，去掉-port
+		到处所有数据库，去掉-d
+	}
+2.恢复所有数据库到mongodb中
+mongorestore /home/mongodb/ 路径是所有数据库的备份
+3.还原指定数据库
+cd D:\........bin
+mongorestore -d mydb1 --dir g:/data/back/mydb
+</body>
+</html>

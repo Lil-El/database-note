@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>无标题文档</title>
+  </head>
+  <body>
+    创建数据库，没有的话，在进行数据库的操作时，会自动创建（insert。。。） use
+    db_name 查： db:显示正在操作的db_name show dbs:查看所有数据库 show show
+    collections ：查看当前数据库集合
+    db.col.find().pretty():查询col集合的数据（格式化）
+    db.col.count({...})：查询有几条 条件查询： db.col.find({"by":"w3c"})
+    db.col.find({"likes":{$lte:100,$gte:10}}) lt小于 lte小于等于 gt大于 ne是!=
+    And: db.col.find({key1:value1, key2:value2}).pretty() or:
+    db.col.find({$or:[{"by":"w3cschool"},{"title":"Mongo"}]}).pretty() where
+    likes>50 AND (by = 'w3cschool' OR title = 'MongoDB 教程'):
+    db.col.find({"likes": {$gt:50}, $or: [{"by": "w3cschool"},{"title": "MongoDB
+    教程"}]}).pretty() db.mycol.find({},{name:1,_id:0})：只显示name，id不显示
+    模糊查询：db.mycol.find({'by':/or/i}) ：包含or的，忽略大小写
+    db.mycol.find({'by':{$regex:/or.*/i}})
+    db.mycol.find({'by':/^or/i}):or打头的，大小写忽略 分页limit：
+    db.mycol.find({},{name:1,id:0}).limit(2).skip(3) ：跳过前三个，显示2个
+    降序sort：db.mycol.find({},{name:1,id:0}).sort({name:-1})//1是升序，-1降序
+    $type db.col.find({"title" : {$type : 2}}) 获取 "col" 集合中 title 为 String
+    的数据 Double 1 String 2 Object 3 Array 4 Binary data 5 Undefined 6 Object
+    id 7 Boolean 8 Date 9 Null 10 Regular Expression 11 JavaScript 13 Symbol 14
+  </body>
+</html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+db.col.update({name:'闫晓东'},{name:'yxd'})只将第一个“name：闫晓东”的所有内容改为“naem：yxd”
+db.col.update({...},{$set:{...},{multi:true})会给所有满足的添加上
+db.col.update({...},{$unset:{...},{multi:true})会给所有满足的删掉
+
+db.col.update({...},{$set:{money:100},{multi:true})
+db.col.update({...},{$inc:{money:100},{multi:true})数字相加
+db.col.update({...},{$push:{job:['..']},{multi:true})字符串添加
+db.col.update({...},{$pushAll:{job:['..','...']},{multi:true})
+db.col.update({...},{$addToSet:{job:'..'},{multi:true})不存在的时候添加
+</body>
+</html>

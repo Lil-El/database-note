@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+db.dropDatabase():删除数据库语法
+db.collection.drop():删除集合
+db.col.remove({}):删除该col的所有数据
+db.col.remove({...},n):删除集合的满足条件的n条内容
+1->n时：db.col.update({...},{$pop:{job:1}}) 删除最后一个，-1删第一个
+db.col.update({...},{$pull:{job:'...'}}) 删除job中的一个“...”
+db.col.update({...},{$popAll:{job:['...','...']}}) 删除job中的多个“...”
+</body>
+</html>

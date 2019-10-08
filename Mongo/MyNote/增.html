@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+insert://键不能重复，重复就报错
+	db.createCollection('col') //没有约束     -----添加集合
+	db.createCollection('col',{capped:tree,autoIndexID:true,size:6142800,max:100000}) //有约束的
+
+	db.col.insert({...})：向数据库的col集合中插入数据
+将数据定义为一个变量，并插入db.col.insert(document)
+document=({title: 'MongoDB 教程', 
+    description: 'MongoDB 是一个 Nosql 数据库',
+    by: 'w3cschool',
+    url: 'http://www.w3cschool.cn',
+    tags: ['mongodb', 'database', 'NoSQL'],
+    likes: 100
+});
+save：//重复就覆盖
+	db.mycol.save({_id:11,name:'龙涛',createtime:new Date()})//时区问题，hour会减8
+	db.mycol.find()[2].createtime.getHours()//但是在get时会以ISOtime的hour+8
+
+	insert(createtiem:ISODate{"2018-11-22 07:58:11"})
+	getHours()//15 (error)
+所以要写成：insert(createtiem:newDate(2018,11,22,07,12,58))
+
+嵌入关联
+	db.mycol.insert({_id:10,name:'闫晓东',info:{sex:'male',age:22,home:'山西'}})
+</body>
+</html>

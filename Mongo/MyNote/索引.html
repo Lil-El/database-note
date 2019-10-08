@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+创建索引：
+db.mycol.ensureIndex({"name":1})  1是按照升序的字段名称，反之-1
+创建多字段索引：
+db.mycol.ensureIndex({"name":1,"_id":-1})
+唯一索引：
+db.mycol.ensureIndex({"email":1},{unique:true,name:"名字"})
+联合唯一索引：
+db.course.ensureIndex({uid:1,cid:1},{unique:true,name:"uidindex"})
+查询索引：
+db.system.indexes.find()
+删除索引：
+db.runCommand({"dropIndexes":"集合名","index":"索引名"})
+</body>
+</html>
